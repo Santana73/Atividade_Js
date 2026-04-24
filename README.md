@@ -1,1 +1,389 @@
 # Atividade_Js
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Exercícios JS</title>
+    <style>
+        :root {
+            --bg-color: #f4f7f6;
+            --sidebar-bg: #2c3e50;
+            --sidebar-hover: #34495e;
+            --primary-color: #3498db;
+            --text-color: #333;
+            --white: #fff;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { display: flex; height: 100vh; background-color: var(--bg-color); color: var(--text-color); }
+        
+        
+        .sidebar { width: 250px; background-color: var(--sidebar-bg); color: var(--white); display: flex; flex-direction: column; overflow-y: auto; }
+        .sidebar h2 { padding: 20px; font-size: 1.2rem; text-align: center; border-bottom: 1px solid #1abc9c; }
+        .nav-btn { background: none; border: none; color: var(--white); padding: 15px 20px; text-align: left; cursor: pointer; transition: 0.3s; font-size: 0.9rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .nav-btn:hover, .nav-btn.active { background-color: var(--sidebar-hover); border-left: 4px solid #1abc9c; }
+        
+        .main-content { flex: 1; padding: 40px; overflow-y: auto; }
+        .section { display: none; background: var(--white); padding: 30px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); max-width: 800px; margin: 0 auto; }
+        .section.active { display: block; animation: fadeIn 0.4s; }
+        
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        
+        h3 { margin-bottom: 20px; color: var(--sidebar-bg); }
+        .input-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input, select, textarea { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 1rem; }
+        button { background-color: var(--primary-color); color: var(--white); border: none; padding: 10px 20px; font-size: 1rem; cursor: pointer; border-radius: 4px; transition: 0.3s; margin-top: 10px; }
+        button:hover { background-color: #2980b9; }
+        .btn-group { display: flex; gap: 10px; flex-wrap: wrap; }
+        
+        .result { margin-top: 20px; padding: 15px; background-color: #e8f4f8; border-left: 4px solid var(--primary-color); border-radius: 4px; display: none; white-space: pre-wrap;}
+        .result.show { display: block; }
+    </style>
+</head>
+<body>
+
+    <nav class="sidebar">
+        <h2>Exercícios JS</h2>
+        <button class="nav-btn active" onclick="showSection(1)">1. Tabuada Simples</button>
+        <button class="nav-btn" onclick="showSection(2)">2. Tabuada Completa</button>
+        <button class="nav-btn" onclick="showSection(3)">3. Calculadora de IMC</button>
+        <button class="nav-btn" onclick="showSection(4)">4. Classificador de Idade</button>
+        <button class="nav-btn" onclick="showSection(5)">5. Média do Aluno</button>
+        <button class="nav-btn" onclick="showSection(6)">6. Calculadora Simples</button>
+        <button class="nav-btn" onclick="showSection(7)">7. Par ou Ímpar</button>
+        <button class="nav-btn" onclick="showSection(8)">8. Conversor de Moedas</button>
+        <button class="nav-btn" onclick="showSection(9)">9. Força da Senha</button>
+        <button class="nav-btn" onclick="showSection(10)">10. Analisador de Texto</button>
+        <button class="nav-btn" onclick="showSection(11)">11. Contador Regressivo</button>
+        <button class="nav-btn" onclick="showSection(12)">12. Adivinhe o Número</button>
+        <button class="nav-btn" onclick="showSection(13)">13. Cadastro Simples</button>
+        <button class="nav-btn" onclick="showSection(14)">14. Calculadora de Desconto</button>
+        <button class="nav-btn" onclick="showSection(15)">15. Cronômetro</button>
+    </nav>
+
+    <main class="main-content">
+        
+        <section id="ex1" class="section active">
+            <h3>1. Tabuada Simples</h3>
+            <div class="input-group">
+                <label>Digite um número:</label>
+                <input type="number" id="num1">
+            </div>
+            <button onclick="calcTabuada1()">Send</button>
+            <div id="res1" class="result"></div>
+        </section>
+
+        <section id="ex2" class="section">
+            <h3>2. Tabuada com Escolha de Operação</h3>
+            <div class="input-group">
+                <label>Digite um número:</label>
+                <input type="number" id="num2">
+            </div>
+            <div class="input-group">
+                <label>Operação:</label>
+                <select id="op2">
+                    <option value="+">Soma (+)</option>
+                    <option value="-">Subtração (-)</option>
+                    <option value="*">Multiplicação (*)</option>
+                    <option value="/">Divisão (/)</option>
+                </select>
+            </div>
+            <button onclick="calcTabuada2()">Calcular</button>
+            <div id="res2" class="result"></div>
+        </section>
+
+        <section id="ex3" class="section">
+            <h3>3. Calculadora de IMC</h3>
+            <div class="input-group">
+                <label>Peso (kg):</label>
+                <input type="number" step="0.1" id="peso3">
+            </div>
+            <div class="input-group">
+                <label>Altura (m):</label>
+                <input type="number" step="0.01" id="altura3">
+            </div>
+            <button onclick="calcIMC()">Calcular IMC</button>
+            <div id="res3" class="result"></div>
+        </section>
+
+        <section id="ex4" class="section">
+            <h3>4. Classificador de Idade</h3>
+            <div class="input-group">
+                <label>Sua idade:</label>
+                <input type="number" id="idade4">
+            </div>
+            <button onclick="classificaIdade()">Verificar</button>
+            <div id="res4" class="result"></div>
+        </section>
+
+        <section id="ex5" class="section">
+            <h3>5. Sistema de Notas</h3>
+            <div class="input-group"><label>Nota 1:</label><input type="number" step="0.1" id="n1_5"></div>
+            <div class="input-group"><label>Nota 2:</label><input type="number" step="0.1" id="n2_5"></div>
+            <div class="input-group"><label>Nota 3:</label><input type="number" step="0.1" id="n3_5"></div>
+            <button onclick="calcMedia()">Calcular Média</button>
+            <div id="res5" class="result"></div>
+        </section>
+
+        <section id="ex6" class="section">
+            <h3>6. Calculadora Simples</h3>
+            <div class="input-group"><label>Valor 1:</label><input type="number" id="v1_6"></div>
+            <div class="input-group"><label>Valor 2:</label><input type="number" id="v2_6"></div>
+            <div class="btn-group">
+                <button onclick="calcSimples('+')">Somar</button>
+                <button onclick="calcSimples('-')">Subtrair</button>
+                <button onclick="calcSimples('*')">Multiplicar</button>
+                <button onclick="calcSimples('/')">Dividir</button>
+            </div>
+            <div id="res6" class="result"></div>
+        </section>
+
+        <section id="ex7" class="section">
+            <h3>7. Par ou Ímpar</h3>
+            <div class="input-group"><label>Digite um número:</label><input type="number" id="num7"></div>
+            <button onclick="verificaParImpar()">Verificar</button>
+            <div id="res7" class="result"></div>
+        </section>
+
+        <section id="ex8" class="section">
+            <h3>8. Conversor de Moedas (R$ para $)</h3>
+            <div class="input-group"><label>Valor em Reais (R$):</label><input type="number" step="0.01" id="reais8"></div>
+            <div class="input-group"><label>Cotação do Dólar:</label><input type="number" step="0.01" id="cotacao8"></div>
+            <button onclick="converterMoeda()">Converter</button>
+            <div id="res8" class="result"></div>
+        </section>
+
+        <section id="ex9" class="section">
+            <h3>9. Força da Senha</h3>
+            <div class="input-group"><label>Digite uma senha:</label><input type="password" id="senha9"></div>
+            <button onclick="verificaSenha()">Verificar</button>
+            <div id="res9" class="result"></div>
+        </section>
+
+        <section id="ex10" class="section">
+            <h3>10. Analisador de Texto</h3>
+            <div class="input-group"><label>Digite seu texto:</label><textarea id="texto10" rows="4"></textarea></div>
+            <button onclick="analisaTexto()">Analisar</button>
+            <div id="res10" class="result"></div>
+        </section>
+
+        <section id="ex11" class="section">
+            <h3>11. Contador Regressivo</h3>
+            <div class="input-group"><label>Iniciar em (segundos):</label><input type="number" id="segundos11"></div>
+            <button onclick="iniciaContador()">Iniciar</button>
+            <div id="res11" class="result" style="font-size: 2rem; font-weight: bold; text-align: center;"></div>
+        </section>
+
+        <section id="ex12" class="section">
+            <h3>12. Adivinhe o Número (1 a 100)</h3>
+            <div class="input-group"><label>Seu palpite:</label><input type="number" id="palpite12"></div>
+            <div class="btn-group">
+                <button onclick="verificaPalpite()">Tentar</button>
+                <button onclick="novoJogoAdivinhacao()" style="background-color:#7f8c8d">Novo Jogo</button>
+            </div>
+            <div id="res12" class="result"></div>
+        </section>
+
+        <section id="ex13" class="section">
+            <h3>13. Cadastro Simples</h3>
+            <div class="input-group"><label>Nome:</label><input type="text" id="nome13"></div>
+            <div class="input-group"><label>Idade:</label><input type="number" id="idade13"></div>
+            <div class="input-group"><label>E-mail:</label><input type="email" id="email13"></div>
+            <button onclick="fazerCadastro()">Cadastrar</button>
+            <div id="res13" class="result"></div>
+        </section>
+
+        <section id="ex14" class="section">
+            <h3>14. Calculadora de Desconto</h3>
+            <div class="input-group"><label>Valor da Compra (R$):</label><input type="number" step="0.01" id="valor14"></div>
+            <button onclick="calcDesconto()">Calcular Total</button>
+            <div id="res14" class="result"></div>
+        </section>
+
+        <section id="ex15" class="section">
+            <h3>15. Cronômetro</h3>
+            <div id="res15" class="result show" style="font-size: 3rem; font-weight: bold; text-align: center; margin-bottom: 20px;">00:00:00</div>
+            <div class="btn-group">
+                <button onclick="iniciarCronometro()">Iniciar</button>
+                <button onclick="pausarCronometro()" style="background-color:#f39c12">Pausar</button>
+                <button onclick="reiniciarCronometro()" style="background-color:#e74c3c">Reiniciar</button>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+       
+        const showRes = (id, text) => {
+            const el = document.getElementById(id);
+            el.innerText = text;
+            el.classList.add('show');
+        }
+
+    
+        function showSection(id) {
+            document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(`ex${id}`).classList.add('active');
+            document.querySelectorAll('.nav-btn')[id-1].classList.add('active');
+        }
+
+
+        function calcTabuada1() {
+            let num = Number(document.getElementById('num1').value);
+            let result = `Tabuada do ${num}:\n\n`;
+            for(let i=0; i<=10; i++) result += `${num} x ${i} = ${num * i}\n`;
+            showRes('res1', result);
+        }
+
+    
+        function calcTabuada2() {
+            let num = Number(document.getElementById('num2').value);
+            let op = document.getElementById('op2').value;
+            let result = `Tabuada do ${num} (${op}):\n\n`;
+            for(let i=0; i<=10; i++) {
+                let calc = op === '+' ? num+i : op === '-' ? num-i : op === '*' ? num*i : (i===0 ? 'Erro' : (num/i).toFixed(2));
+                result += `${num} ${op} ${i} = ${calc}\n`;
+            }
+            showRes('res2', result);
+        }
+
+    
+        function calcIMC() {
+            let peso = Number(document.getElementById('peso3').value);
+            let altura = Number(document.getElementById('altura3').value);
+            if(!peso || !altura) return showRes('res3', 'Preencha os dados corretamente.');
+            let imc = peso / (altura * altura);
+            let classif = '';
+            if(imc < 18.5) classif = 'Abaixo do peso';
+            else if(imc <= 24.9) classif = 'Peso normal';
+            else if(imc <= 29.9) classif = 'Sobrepeso';
+            else classif = 'Obesidade';
+            showRes('res3', `Seu IMC é: ${imc.toFixed(2)}\nClassificação: ${classif}`);
+        }
+
+     
+        function classificaIdade() {
+            let idade = Number(document.getElementById('idade4').value);
+            let classif = idade < 12 ? 'Criança' : idade < 18 ? 'Adolescente' : idade < 60 ? 'Adulto' : 'Idoso';
+            showRes('res4', `Você é considerado: ${classif}`);
+        }
+
+      
+        function calcMedia() {
+            let n1 = Number(document.getElementById('n1_5').value);
+            let n2 = Number(document.getElementById('n2_5').value);
+            let n3 = Number(document.getElementById('n3_5').value);
+            let media = (n1 + n2 + n3) / 3;
+            let status = media >= 7 ? 'APROVADO' : 'REPROVADO';
+            showRes('res5', `Média Final: ${media.toFixed(2)}\nStatus: O aluno está ${status}`);
+        }
+
+        
+        function calcSimples(op) {
+            let v1 = Number(document.getElementById('v1_6').value);
+            let v2 = Number(document.getElementById('v2_6').value);
+            let result = op === '+' ? v1+v2 : op === '-' ? v1-v2 : op === '*' ? v1*v2 : (v2===0 ? 'Erro: Div por 0' : v1/v2);
+            showRes('res6', `Resultado: ${result}`);
+        }
+
+        
+        function verificaParImpar() {
+            let num = Number(document.getElementById('num7').value);
+            showRes('res7', `O número ${num} é ${num % 2 === 0 ? 'PAR' : 'ÍMPAR'}.`);
+        }
+
+        
+        function converterMoeda() {
+            let reais = Number(document.getElementById('reais8').value);
+            let cot = Number(document.getElementById('cotacao8').value);
+            showRes('res8', `Valor em Dólar: $ ${(reais / cot).toFixed(2)}`);
+        }
+
+       
+        function verificaSenha() {
+            let senha = document.getElementById('senha9').value;
+            let forte = senha.length >= 8 && /[A-Z]/.test(senha) && /[0-9]/.test(senha); // Adicionado regras básicas extras para ser mais realista
+            showRes('res9', forte ? 'Sua senha é FORTE.' : 'Sua senha é FRACA. (Use pelo menos 8 caracteres, números e maiúsculas)');
+        }
+
+       
+        function analisaTexto() {
+            let txt = document.getElementById('texto10').value;
+            let chars = txt.length;
+            let words = txt.trim() === '' ? 0 : txt.trim().split(/\s+/).length;
+            let uppers = (txt.match(/[A-Z]/g) || []).length;
+            showRes('res10', `Caracteres: ${chars}\nPalavras: ${words}\nLetras Maiúsculas: ${uppers}`);
+        }
+
+       
+        let timer11;
+        function iniciaContador() {
+            clearInterval(timer11);
+            let seg = Number(document.getElementById('segundos11').value);
+            showRes('res11', seg);
+            timer11 = setInterval(() => {
+                seg--;
+                if(seg < 0) { clearInterval(timer11); showRes('res11', 'TEMPO ESGOTADO!'); }
+                else { showRes('res11', seg); }
+            }, 1000);
+        }
+
+      
+        let numeroSecreto12 = Math.floor(Math.random() * 100) + 1;
+        function verificaPalpite() {
+            let p = Number(document.getElementById('palpite12').value);
+            if(p === numeroSecreto12) showRes('res12', '🎉 PARABÉNS! Você acertou!');
+            else if(p < numeroSecreto12) showRes('res12', 'O número secreto é MAIOR.');
+            else showRes('res12', 'O número secreto é MENOR.');
+        }
+        function novoJogoAdivinhacao() {
+            numeroSecreto12 = Math.floor(Math.random() * 100) + 1;
+            document.getElementById('palpite12').value = '';
+            showRes('res12', 'Novo jogo iniciado. Tente adivinhar!');
+        }
+
+       
+        function fazerCadastro() {
+            let n = document.getElementById('nome13').value;
+            let i = document.getElementById('idade13').value;
+            let e = document.getElementById('email13').value;
+            showRes('res13', `Dados Cadastrados com Sucesso:\n\nNome: ${n}\nIdade: ${i}\nE-mail: ${e}`);
+        }
+
+        
+        function calcDesconto() {
+            let v = Number(document.getElementById('valor14').value);
+            let desc = 0;
+            if(v > 100 && v <= 500) desc = 0.10;
+            else if(v > 500) desc = 0.20;
+            
+            let valorDesc = v * desc;
+            let final = v - valorDesc;
+            showRes('res14', `Valor Original: R$ ${v.toFixed(2)}\nDesconto Aplicado: ${(desc*100)}% (R$ ${valorDesc.toFixed(2)})\nTotal a Pagar: R$ ${final.toFixed(2)}`);
+        }
+
+        
+        let timer15, ms15 = 0;
+        const formatTime = (ms) => {
+            let milisegundos = ms % 100;
+            let segundos = Math.floor((ms / 100) % 60);
+            let minutos = Math.floor((ms / 6000) % 60);
+            return `${String(minutos).padStart(2, '0')}:${String(segundos).padStart(2, '0')}:${String(milisegundos).padStart(2, '0')}`;
+        }
+        function iniciarCronometro() {
+            clearInterval(timer15);
+            timer15 = setInterval(() => { ms15++; document.getElementById('res15').innerText = formatTime(ms15); }, 10);
+        }
+        function pausarCronometro() { clearInterval(timer15); }
+        function reiniciarCronometro() {
+            clearInterval(timer15);
+            ms15 = 0;
+            document.getElementById('res15').innerText = '00:00:00';
+        }
+    </script>
+</body>
+</html>
